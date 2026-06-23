@@ -2,7 +2,7 @@ import react from 'react';
 
 const App = () => {
   return (
-    <div className="text-7xl text-emerald-500"> app </div>
+    <div className="h-[14000px] text-7xl text-emerald-500"> app </div>
   );
 };
 
