@@ -1,8 +1,14 @@
 import react from 'react';
+import navbar from './components/layout/navbar';
 
 const App = () => {
   return (
-    <div className="h-[14000px] text-7xl text-emerald-500"> app </div>
+    <div className="min-h-screen bg-black"> 
+      <navbar/>
+      
+      
+
+    </div>
   );
 };
 

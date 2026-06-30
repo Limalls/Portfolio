@@ -29,12 +29,13 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #262423;
+  background: #2d2b2a;
 }
 
 ::-webkit-scrollbar-thumb {
   background: linear-gradient(180deg, #8350C4, #723eb5);
   border-radius: 5px;
+  height: 200px;
 }
 
 /* hide scrollbar for carousel*/
