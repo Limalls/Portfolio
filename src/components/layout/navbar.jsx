@@ -1,6 +1,7 @@
 import react from 'react'
 import {Code, Menu, Section, X} from 'lucide-react'
 import {navLinks} from '../../utils/constants'
+import { useState } from 'react'
 
 const Navbar = () => {
 

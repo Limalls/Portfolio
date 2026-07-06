@@ -31,5 +31,22 @@ export const useScrollSpy = (sectionIds, offset = 100) => {
         return () => {
             window.removeEventListener('scroll', handleScroll);
         }; 
-    } [sectionIds, offset]);
+    }, [sectionIds, offset]);
+
+    return activeSection;
 };
+
+
+// Smooth scroll function
+export const scrollTosection = (sectionId, offset = 80) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+        const sectionTop = section.offsetTop;
+        window.scrollTo({
+            top,
+            behavior: 'smooth'
+        });
+    }
+};
+
+
