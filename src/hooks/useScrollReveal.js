@@ -4,7 +4,7 @@ export const useScrollSpy = (options = {}) => {
     const {
         threshold = 0.5,
         rootMargin = '0px',
-    }
+    } = options;
 
     const [isVisible, setIsVisible] = useState(false);
     const ref = useRef(null);
@@ -25,3 +25,15 @@ export const useScrollSpy = (options = {}) => {
                 rootMargin,
             }
         );
+
+        observer.observe(element);
+        
+        return () => {
+            if (element) {
+                observer.unobserve(element);
+            }
+        };
+    }, [threshold, rootMargin]);
+
+    return [ref, isVisible];
+};
