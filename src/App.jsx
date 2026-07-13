@@ -1,13 +1,10 @@
-import react from 'react';
-import navbar from './components/layout/navbar';
+import React from 'react'
+import Navbar from './components/layout/Navbar'
 
 const App = () => {
   return (
-    <div className="min-h-screen bg-black"> 
-      <navbar/>
-      
-      
-
+    <div className="bg-emerald-50 dark:bg-gray-900 min-h-screen">
+      <Navbar />
     </div>
   );
 };
