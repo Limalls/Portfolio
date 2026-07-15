@@ -40,7 +40,7 @@ const Navbar = () => {
                     <button
                         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                         aria-label="Home"
-                        className="text-2xl text-white font-bold hover:opacity-80 transition-opacity"
+                        className="text-2xl font-bold bg-linear-to-r from-primary via-accent/80 to-accent bg-clip-text text-transparent hover:opacity-80 transition-opacity"
                     >
                         {PERSONAL_INFO.name.split(' ')[0]}
                     </button>
@@ -69,9 +69,9 @@ const Navbar = () => {
                 <div className="hidden md:block">
                     <button
                         onClick={() => handleNavClick('contact')}
-                        className="px-5 py-2.5 rounded-lg bg-primary text-text font-semibold hover:bg-primary-hover transition-all duration-300 hover:scale-105"
+                        className="px-5 py-2.5 rounded-lg bg-midnight-violet-500 text-text font-semibold hover:bg-midnight-violet-600 transition-all duration-300 hover:scale-105"
                     >
-                        Hire Me
+                        Contact Me
                     </button>
                 </div>
 
@@ -110,7 +110,7 @@ const Navbar = () => {
 
                         <button
                             onClick={() => handleNavClick('contact')}
-                            className="mt-2 px-5 py-2.5 rounded-lg bg-primary text-text font-semibold hover:bg-primary-hover transition-all duration-300"
+                            className="mt-2 px-5 py-2.5 rounded-lg bg-accent text-text font-semibold hover:bg-ring-hover transition-all duration-300"
                         >
                             Hire Me
                         </button>
