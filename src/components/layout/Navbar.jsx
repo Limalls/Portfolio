@@ -2,10 +2,19 @@ import React, { useState, useEffect } from 'react'
 import { Code, Menu, X } from 'lucide-react'
 import { navLinks, PERSONAL_INFO } from '../../utils/constants'
 import { useScrollSpy, scrollToSection } from '../../hooks/useScrollSpy'
+import {motion} from 'framer-motion'
+
+const bounceTransition = {
+    duration: 0.4,
+    repeat: Infinity,
+    repeatType: "reverse",
+    ease: "easeOut"
+}
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const [isScrolled, setIsScrolled] = useState(false)
+    const [bounceHire, setBounceHire] = useState(false)
 
     const activeSection = useScrollSpy(navLinks.map((link) => link.id))
 
@@ -21,6 +30,16 @@ const Navbar = () => {
     const handleNavClick = (sectionId) => {
         scrollToSection(sectionId)
         setIsMenuOpen(false)
+    }
+
+    const handleMenuToggle = () => {
+        const opening = !isMenuOpen
+        setIsMenuOpen(opening)
+
+        if (opening) {
+            setBounceHire(true)
+            setTimeout(() => setBounceHire(false), 2520)    
+        }
     }
 
     return (
@@ -40,7 +59,7 @@ const Navbar = () => {
                     <button
                         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                         aria-label="Home"
-                        className="text-2xl font-bold bg-linear-to-r from-primary via-accent/80 to-accent bg-clip-text text-transparent hover:opacity-80 transition-opacity"
+                        className="text-2xl font-black bg-linear-to-r from-primary via-accent/80 to-accent bg-clip-text text-transparent hover:opacity-80 transition-opacity "
                     >
                         {PERSONAL_INFO.name.split(' ')[0]}
                     </button>
@@ -78,7 +97,7 @@ const Navbar = () => {
                 {/* Mobile Menu Button */}
                 <button
                     className="md:hidden text-text"
-                    onClick={() => setIsMenuOpen(!isMenuOpen)}
+                    onClick={handleMenuToggle}
                     aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
                 >
                     {isMenuOpen ? (
@@ -110,7 +129,9 @@ const Navbar = () => {
 
                         <button
                             onClick={() => handleNavClick('contact')}
-                            className="mt-2 px-5 py-2.5 rounded-lg bg-accent text-text font-semibold hover:bg-ring-hover transition-all duration-300"
+                            className={`mt-2 mb-2  px-13 py-2.5 rounded-lg bg-accent text-text font-semibold hover:bg-ring-hover transition-colors duration-300 ${
+                                bounceHire ? 'animate-bounce' : ''
+                            }`}
                         >
                             Hire Me
                         </button>
