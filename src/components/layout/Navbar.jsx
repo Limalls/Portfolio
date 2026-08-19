@@ -67,12 +67,19 @@ const Navbar = () => {
 
                 {/* Logo */}
                 <div className="flex items-center gap-3">
-                    <Code className="w-7 h-7 text-primary " />
+                    <Code 
+                    className="
+
+                    w-7 h-7 text-primary 
+                    dark:text-tropical-teal-400
+
+                    " />
 
                     <button
                         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                         aria-label="Home"
-                        className="text-2xl font-black bg-linear-to-r from-primary via-accent/80 to-accent bg-clip-text text-transparent hover:opacity-80 transition-opacity dark:text-gray-400"
+                        className="text-2xl font-black bg-linear-to-r from-primary via-accent/80 to-accent bg-clip-text text-transparent hover:opacity-80 transition-opacity 
+                        dark:bg-linear-to-r dark:from-tropical-teal-400 dark:via-tropical-teal-900/10 dark:to-tropical-teal-200 dark:hover:opacity-80"
                     >
                         {PERSONAL_INFO.name.split(' ')[0]}
                     </button>
@@ -112,7 +119,9 @@ const Navbar = () => {
                 <div className="hidden md:block">
                     <button
                         onClick={() => handleNavClick('contact')}
-                        className="px-8 py-4 ml-12 rounded-xl bg-midnight-violet-600 text-text font-semibold hover:bg-midnight-violet-800 transition-all duration-500 hover:animated-glow dark:bg-tropical-teal-400 dark:hover:bg-midnight-violet-800 dark:text-tropical-teal-100"
+                        className="
+                        px-8 py-4 ml-12 rounded-xl bg-midnight-violet-600 text-text font-semibold hover:bg-midnight-violet-800 transition-all duration-500 hover:animated-glow 
+                        dark:bg-tropical-teal-400 dark:hover:bg-tropical-teal-800 dark:text-tropical-teal-100 dark:hover:shadow-tropical-teal-400/50 dark:hover:animated-glow-secondary"
                     >
                         Hire Me
                     </button>
@@ -120,14 +129,14 @@ const Navbar = () => {
 
                 {/* Mobile Menu Button */}
                 <button
-                    className="md:hidden text-text justify-end ml-auto p-2 rounded-md hover:bg-bg/10 transition-colors"
+                    className="md:hidden text-text justify-end ml-auto p-2 rounded-md hover:bg-bg/10 transition-colors dark:text-stone-400 dark:hover:bg-bg/10"
                     onClick={handleMenuToggle}
                     aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
                 >
                     {isMenuOpen ? (
-                        <X className="w-7 h-7" />
+                        <X className="w-7 h-7 dark:text-stone-700" />
                     ) : (
-                        <Menu className="w-7 h-7" />
+                        <Menu className="w-7 h-7 dark:text-stone-700" />
                     )}
                 </button>
             </div>

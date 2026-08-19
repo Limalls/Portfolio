@@ -203,6 +203,11 @@ body {
   from { box-shadow: 0 0 10px var(--color-midnight-violet-500); }
   to { box-shadow: 0 0 25px var(--color-midnight-violet-500); }
 }
+
+@keyframes glow-secondary {
+  from { box-shadow: 0 0 10px var(--color-midnight-violet-500); }
+  to { box-shadow: 0 0 25px var(--color-tropical-teal-500); }
+}
  
 /*ultility classes*/
  
@@ -220,6 +225,10 @@ body {
  
 @utility animated-glow {
   animation: glow 0.7s infinite alternate;
+}
+
+@utility animated-glow-secondary {
+  animation: glow-secondary 0.7s infinite alternate;
 }
 
 /*Clamp*/
