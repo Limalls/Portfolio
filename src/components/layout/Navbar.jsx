@@ -70,7 +70,7 @@ const Navbar = () => {
                     <Code 
                     className="
 
-                    w-7 h-7 text-primary 
+                    w-8 h-8 text-primary 
                     dark:text-tropical-teal-400
 
                     " />
@@ -79,7 +79,7 @@ const Navbar = () => {
                         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                         aria-label="Home"
                         className="text-2xl font-black bg-linear-to-r from-primary via-accent/80 to-accent bg-clip-text text-transparent hover:opacity-80 transition-opacity 
-                        dark:bg-linear-to-r dark:from-tropical-teal-400 dark:via-tropical-teal-900/10 dark:to-tropical-teal-200 dark:hover:opacity-80"
+                        dark:bg-linear-to-r dark:from-tropical-teal-400 dark:via-mint-cream-300 dark:to-mint-cream-500 dark:hover:opacity-80"
                     >
                         {PERSONAL_INFO.name.split(' ')[0]}
                     </button>
@@ -93,10 +93,10 @@ const Navbar = () => {
                             onClick={() => handleNavClick(link.id)}
                             className={`text-xl font-bold transition-all duration-300 ${
                                 activeSection === link.id
-                                    ? 'text-primary dark:text-stone-700 dark:hover:text-primary'
+                                    ? 'text-primary dark:text-stone-700 dark:hover:text-stone-400'
                                     : isScrolled
-                                    ? 'text-text-secondary hover:text-primary dark:text-stone-700 dark:hover:text-primary'
-                                    : 'text-text/70 hover:text-text dark:text-stone-700 dark:hover:text-white'
+                                    ? 'text-text-secondary hover:text-primary dark:text-stone-700 dark:hover:text-stone-400 '
+                                    : 'text-text/70 hover:text-text dark:text-stone-700 dark:hover:text-stone-400'
                             }`}
                         >
                             {link.label}
@@ -146,19 +146,18 @@ const Navbar = () => {
             {/* Mobile Menu */}
             {isMenuOpen && (
                 <motion.div
-                    className="md:hidden bg-surface border-t border-border backdrop-blur-xl "
+                    className="md:hidden bg-surface backdrop-blur-xl dark:bg-mint-cream-50"
                     initial={{ y: -20, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     exit={{ y: -20, opacity: 0 }}
                     transition={{ duration: 0.35, ease: 'easeOut' }}
                 >
-                    <div className="flex flex-col items-center gap-6 py-6 transition-all duration-300">
-
+                    <div className="flex flex-col gap-6 py-2 transition-all duration-300 px-4">
                         {navLinks.map((link) => (
                             <button
                                 key={link.id}
                                 onClick={() => handleNavClick(link.id)}
-                                className={`text-base font-medium transition-colors ${
+                                className={`w-full text-right p-2 text-base font-medium transition-colors ${
                                     activeSection === link.id
                                         ? 'text-primary dark:text-primary'
                                         : 'text-text-secondary hover:text-primary dark:text-gray-400 dark:hover:text-primary'
@@ -170,13 +169,12 @@ const Navbar = () => {
 
                         <button
                             onClick={() => handleNavClick('contact')}
-                            className={`mt-2 mb-2  px-13 py-2.5 rounded-lg bg-accent text-text font-semibold hover:bg-ring-hover transition-colors duration-300 ${
+                            className={`mt-2 mb-2 px-40 py-2.5 rounded-lg bg-accent text-text font-semibold hover:bg-ring-hover dark:bg-mint-cream-400 transition-colors duration-300 ${
                                 bounceHire ? 'animate-bounce' : ''
-                            }`}
+                            } mx-auto`}
                         >
                             Hire Me
                         </button>
-
                     </div>
                 </motion.div>
             )}
