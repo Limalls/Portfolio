@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *)) {
+  
+}
+
 @theme {
 
       /* Midnight Violet */
@@ -69,7 +73,7 @@
   --color-tropical-teal-950: #0c1717;
 
   /* Mint Cream */
-  --color-mint-cream-50: #ecf9f3;
+  --color-mint-cream-50: #F0EAD6;
   --color-mint-cream-100: #d9f2e7;
   --color-mint-cream-200: #b3e6cf;
   --color-mint-cream-300: #8cd9b8;
@@ -123,6 +127,10 @@
     font-family: var(--font-family);
     scroll-behavior: smooth;
   }
+}
+
+button {
+  cursor: pointer;
 }
 
 body {
@@ -191,20 +199,28 @@ body {
   }
 }
 
+@keyframes glow {
+  from { box-shadow: 0 0 10px var(--color-midnight-violet-500); }
+  to { box-shadow: 0 0 25px var(--color-midnight-violet-500); }
+}
+ 
 /*ultility classes*/
-
+ 
 .animate-fadeIn {
   animation: fadeIn 0.6s ease-out;
 }
-
+ 
 .animated-pulse {
   animation: pulse 3s ease-in-out infinite;
 }
-
+ 
 .animated-spin {
   animation: spin 5s linear infinite;
 }
-
+ 
+@utility animated-glow {
+  animation: glow 0.7s infinite alternate;
+}
 
 /*Clamp*/
 

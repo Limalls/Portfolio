@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { Code, Menu, X } from 'lucide-react'
+import { Code, Menu, X, Sun, Moon } from 'lucide-react'
 import { navLinks, PERSONAL_INFO } from '../../utils/constants'
 import { useScrollSpy, scrollToSection } from '../../hooks/useScrollSpy'
-import {motion} from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 
 const bounceTransition = {
     duration: 0.4,
@@ -15,6 +15,7 @@ const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const [isScrolled, setIsScrolled] = useState(false)
     const [bounceHire, setBounceHire] = useState(false)
+    const [theme, setTheme] = useState('light')
 
     const activeSection = useScrollSpy(navLinks.map((link) => link.id))
 
@@ -27,6 +28,18 @@ const Navbar = () => {
         return () => window.removeEventListener('scroll', handleScroll)
     }, [])
 
+    useEffect(() => {
+        const saved = localStorage.getItem('theme')
+        if (saved) setTheme(saved)
+        else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) setTheme('dark')
+    }, [])
+
+    useEffect(() => {
+        if (theme === 'dark') document.documentElement.classList.add('dark')
+        else document.documentElement.classList.remove('dark')
+        localStorage.setItem('theme', theme)
+    }, [theme])
+
     const handleNavClick = (sectionId) => {
         scrollToSection(sectionId)
         setIsMenuOpen(false)
@@ -38,7 +51,7 @@ const Navbar = () => {
 
         if (opening) {
             setBounceHire(true)
-            setTimeout(() => setBounceHire(false), 2520)    
+            setTimeout(() => setBounceHire(false), 2500)    
         }
     }
 
@@ -50,7 +63,7 @@ const Navbar = () => {
                     : 'bg-transparent'
             }`}
         >
-            <div className="max-w-[1320px] mx-auto px-5 h-20 flex items-center justify-between">
+            <div className="max-w-[1320px] mx-auto px-5 h-20 flex items-center mt-3" >
 
                 {/* Logo */}
                 <div className="flex items-center gap-3">
@@ -59,24 +72,24 @@ const Navbar = () => {
                     <button
                         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                         aria-label="Home"
-                        className="text-2xl font-black bg-linear-to-r from-primary via-accent/80 to-accent bg-clip-text text-transparent hover:opacity-80 transition-opacity "
+                        className="text-2xl font-black bg-linear-to-r from-primary via-accent/80 to-accent bg-clip-text text-transparent hover:opacity-80 transition-opacity dark:text-gray-400"
                     >
                         {PERSONAL_INFO.name.split(' ')[0]}
                     </button>
                 </div>
 
                 {/* Desktop Links */}
-                <div className="hidden md:flex items-center gap-10">
+                <div className="hidden md:flex items-center gap-10 justify-evenly flex-1 ml-12">
                     {navLinks.map((link) => (
                         <button
                             key={link.id}
                             onClick={() => handleNavClick(link.id)}
                             className={`text-xl font-bold transition-all duration-300 ${
                                 activeSection === link.id
-                                    ? 'text-primary'
+                                    ? 'text-primary dark:text-stone-700 dark:hover:text-primary'
                                     : isScrolled
-                                    ? 'text-text-secondary hover:text-primary'
-                                    : 'text-text/70 hover:text-text'
+                                    ? 'text-text-secondary hover:text-primary dark:text-stone-700 dark:hover:text-primary'
+                                    : 'text-text/70 hover:text-text dark:text-stone-700 dark:hover:text-white'
                             }`}
                         >
                             {link.label}
@@ -84,19 +97,30 @@ const Navbar = () => {
                     ))}
                 </div>
 
+                {/* Theme Toggle (desktop) */}
+                <div className="hidden md:flex items-center ml-12 dark:text-gray-400">
+                    <button
+                        onClick={() => setTheme(prev => prev === 'dark' ? 'light' : 'dark')}
+                        aria-label="Toggle theme"
+                        className="p-2 rounded-md text-text hover:bg-bg/10 transition-colors"
+                    >
+                        {theme === 'dark' ? <Sun className="w-5 h-5 text-yellow-400" /> : <Moon className="w-5 h-5 text-midnight-violet-600    " />}
+                    </button>
+                </div>
+
                 {/* Desktop CTA */}
                 <div className="hidden md:block">
                     <button
                         onClick={() => handleNavClick('contact')}
-                        className="px-5 py-2.5 rounded-lg bg-midnight-violet-500 text-text font-semibold hover:bg-midnight-violet-600 transition-all duration-300 hover:scale-105"
+                        className="px-8 py-4 ml-12 rounded-xl bg-midnight-violet-600 text-text font-semibold hover:bg-midnight-violet-800 transition-all duration-500 hover:animated-glow dark:bg-tropical-teal-400 dark:hover:bg-midnight-violet-800 dark:text-tropical-teal-100"
                     >
-                        Contact Me
+                        Hire Me
                     </button>
                 </div>
 
                 {/* Mobile Menu Button */}
                 <button
-                    className="md:hidden text-text"
+                    className="md:hidden text-text justify-end ml-auto p-2 rounded-md hover:bg-bg/10 transition-colors"
                     onClick={handleMenuToggle}
                     aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
                 >
@@ -107,11 +131,19 @@ const Navbar = () => {
                     )}
                 </button>
             </div>
+                    
+            
 
             {/* Mobile Menu */}
             {isMenuOpen && (
-                <div className="md:hidden bg-surface border-t border-border backdrop-blur-xl">
-                    <div className="flex flex-col items-center gap-6 py-6">
+                <motion.div
+                    className="md:hidden bg-surface border-t border-border backdrop-blur-xl "
+                    initial={{ y: -20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ y: -20, opacity: 0 }}
+                    transition={{ duration: 0.35, ease: 'easeOut' }}
+                >
+                    <div className="flex flex-col items-center gap-6 py-6 transition-all duration-300">
 
                         {navLinks.map((link) => (
                             <button
@@ -119,8 +151,8 @@ const Navbar = () => {
                                 onClick={() => handleNavClick(link.id)}
                                 className={`text-base font-medium transition-colors ${
                                     activeSection === link.id
-                                        ? 'text-primary'
-                                        : 'text-text-secondary hover:text-primary'
+                                        ? 'text-primary dark:text-primary'
+                                        : 'text-text-secondary hover:text-primary dark:text-gray-400 dark:hover:text-primary'
                                 }`}
                             >
                                 {link.label}
@@ -137,7 +169,7 @@ const Navbar = () => {
                         </button>
 
                     </div>
-                </div>
+                </motion.div>
             )}
         </nav>
     )

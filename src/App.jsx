@@ -1,10 +1,12 @@
 import React from 'react'
 import Navbar from './components/layout/Navbar'
+import Footer from './components/layout/Footer';
 
 const App = () => {
   return (
-    <div className="bg-emerald-50 dark:bg-gray-900 min-h-screen">
+    <div className="dark:bg-mint-cream-50 min-h-screen">
       <Navbar />
+      <Footer />
     </div>
   );
 };
