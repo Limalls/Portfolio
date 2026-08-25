@@ -115,6 +115,17 @@ const Navbar = () => {
                     </button>
                 </div>
 
+                {/* Mobile Theme Toggle */}
+                <div className="md:hidden flex items-center ml-12 dark:text-gray-400">
+                    <button
+                        onClick={() => setTheme(prev => prev === 'dark' ? 'light' : 'dark')}
+                        aria-label="Toggle theme"
+                        className="p-2 rounded-md text-text hover:bg-bg/10 transition-colors"
+                    >
+                        {theme === 'dark' ? <Sun className="w-5 h-5 text-yellow-400" /> : <Moon className="w-5 h-5 text-midnight-violet-600    " />}
+                    </button>
+                </div>
+
                 {/* Desktop CTA */}
                 <div className="hidden md:block">
                     <button
